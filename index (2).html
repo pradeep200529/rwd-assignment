@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Project</title>
+</head>
+<body>
+  <h2>Frontend to Backend Connection</h2>
+
+  <input type="text" id="name" placeholder="Enter name" />
+  <button onclick="sendData()">Submit</button>
+
+  <p id="result"></p>
+
+  <script>
+    function sendData() {
+      const name = document.getElementById("name").value;
+
+      fetch("http://localhost:3000/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: name })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").innerText =
+          "Response from backend: " + data.name;
+      });
+    }
+  </script>
+</body>
+</html>
